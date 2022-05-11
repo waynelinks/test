@@ -37,23 +37,3 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
-
-  test:
-    defaults:
-      run:
-        working-directory: packages/api
-        
-    name: Running tests
-    runs-on: ubuntu-latest
-    needs: [build]
-    
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Install Dependencies
-        run: yarn
-
-      - name: Run Test Suite
-        run: |
-          yarn test
