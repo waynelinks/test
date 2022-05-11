@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build Environment
+    name: Build OS Environment
     runs-on: ubuntu-latest
 
     strategy:
@@ -38,7 +38,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
 
-  test:
+  test-local:
     defaults:
       run:
         working-directory: packages/api
