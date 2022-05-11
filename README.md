@@ -14,6 +14,7 @@
     <img alt="" src="https://img.shields.io/npm/l/next.svg?style=for-the-badge&labelColor=000000">
   </a>
 </p>
+[![.github/workflows/deploy-auth.yml](https://github.com/waynelinks/test/actions/workflows/deploy-auth.yml/badge.svg?branch=main&event=deployment_status)](https://github.com/waynelinks/test/actions/workflows/deploy-auth.yml)
 
 ## Description
 Face recognition app using Clarifai api
