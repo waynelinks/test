@@ -1,4 +1,4 @@
-name: Auth Server CI
+name: Setup CI Environment
 
 on:
   push:
