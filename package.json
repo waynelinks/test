@@ -1,0 +1,25 @@
+{
+  "name": "@ai-detect/root",
+  "private": true,
+  "description": "Face recognition app using Clarifai api",
+  "author": "Wayne <wayne.links@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waynelinks/ai-detect.git"
+  },
+  "bugs": {
+    "url": "https://github.com/waynelinks/ai-detect/issues"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0",
+    "lint-staged": "^12.4.1",
+    "husky": "^7.0.0"
+  }
+}

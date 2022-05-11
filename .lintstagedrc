@@ -1,0 +1,6 @@
+{
+  "*.(js|ts)": [
+    "eslint --fix",
+    "jest --bail --findRelatedTests packages/*/src/**/*.{ts,tsx,js,jsx}"
+  ]
+}
