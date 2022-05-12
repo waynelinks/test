@@ -70,6 +70,4 @@ jobs:
           step: start
           token: ${{ secrets.GITHUB_TOKEN }}
           env: ${{ fromJSON('["Production", "Preview"]')[github.ref != 'refs/heads/main'] }} 
-
-      - name: Checkout code
-        uses: actions/checkout@v3
+          no_override: true
