@@ -61,6 +61,9 @@ jobs:
     runs-on: ubuntu-20.04
     permissions: 
       deployments: write
+    defaults:
+      run:
+        working-directory: packages/api
     timeout-minutes: 40
     steps:
       - name: Start auth-srv deployment
@@ -82,7 +85,6 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_AUTH_PROJECT_ID }}
           scope: ${{ secrets.VERCEL_ORG_ID }}
-          working-directory: packages/api
   
       - name: Update deployment status
         uses: bobheadxi/deployments@v1
