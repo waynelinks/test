@@ -1,4 +1,4 @@
-name: Deploy to Vercel (staging) - Auth
+name: Deploy to Vercel (staging) - auth
 
 on:
   push:
