@@ -1,4 +1,4 @@
-name: Deploy to Vercel (staging) - auth
+name: Deploy to Vercel (staging) - Auth
 
 on:
   push:
@@ -82,6 +82,7 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_AUTH_PROJECT_ID }}
           scope: ${{ secrets.VERCEL_ORG_ID }}
+          working-directory: packages/api
 
       - name: Update deployment status
         uses: bobheadxi/deployments@v1
