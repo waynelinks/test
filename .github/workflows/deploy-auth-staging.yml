@@ -36,10 +36,6 @@ jobs:
           node-version: '14.x'
           cache: "yarn"
 
-      - run: node -v
-      - run: npm -v
-      - run: yarn -v
-
 #   run-tests-before-staging:
 #     needs: [setup-environment]
 #     defaults:
