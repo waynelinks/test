@@ -84,13 +84,15 @@ jobs:
           scope: ${{ secrets.VERCEL_ORG_ID }}
           working-directory: packages/api
 
-      - name: Update deployment status
-        uses: bobheadxi/deployments@v1
-        if: always()
-        run: |
-          echo ${{ job.status }}
-        with:
-          step: finish
-          token: ${{ secrets.GITHUB_TOKEN }}
-          status: ${{ job.status }}
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+  update-deploy-status:
+      needs: [start-staging-deployment]
+      runs-on: ubuntu-20.04
+      name: Update deployment status
+      steps:
+        - uses: bobheadxi/deployments@v1
+          if: always()
+          with:
+            step: finish
+            token: ${{ secrets.GITHUB_TOKEN }}
+            status: ${{ job.status }}
+            deployment_id: ${{ steps.deployment.outputs.deployment_id }}
