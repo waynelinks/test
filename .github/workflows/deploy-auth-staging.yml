@@ -37,12 +37,12 @@ jobs:
           cache: "yarn"
 
   run-tests-before-staging:
+    needs: [setup-environment]
     defaults:
       run:
         working-directory: packages/api
     name: Run unit tests before staging
     runs-on: ubuntu-20.04
-    needs: [setup-environment]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -53,3 +53,21 @@ jobs:
       - name: Run unit tests
         run: |
           yarn test
+
+  start-staging-deployment:
+    needs: [run-tests-before-staging]
+    if: github.repository_owner == 'waynelinks' && ((github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push'))
+    name: Starts Vercel deployment (staging) (Ubuntu 20.04)
+    runs-on: ubuntu-20.04
+    permissions: 
+      deployments: write
+    timeout-minutes: 40
+    steps:
+      - name: Start auth-srv deployment
+        uses: bobheadxi/deployments@v0.4.3
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: ${{ fromJSON('["Production", "Preview"]')[github.ref != 'refs/heads/main'] }} 
+          no_override: true
