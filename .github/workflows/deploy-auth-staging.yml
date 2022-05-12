@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
         - run: node -v
-        - run: echo ls
+        - run: pwd
 #       - name: Checkout code
 #         uses: actions/checkout@v3
 
