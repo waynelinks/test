@@ -55,7 +55,7 @@ jobs:
           yarn test
 
   start-staging-deployment:
-    needs: [run-tests-before-staging]
+    needs: [setup-environment, run-tests-before-staging]
     if: github.repository_owner == 'waynelinks' && ((github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push'))
     name: Starts Vercel deployment (staging) (Ubuntu 20.04)
     runs-on: ubuntu-20.04
@@ -87,6 +87,8 @@ jobs:
       - name: Update deployment status
         uses: bobheadxi/deployments@v1
         if: always()
+        run: |
+          echo ${{ job.status }}
         with:
           step: finish
           token: ${{ secrets.GITHUB_TOKEN }}
