@@ -6,14 +6,6 @@ on:
       - "main"
     paths:
       - '.github/workflows/deploy-auth-staging.yml'
-      - 'scripts/populate-git-env.sh'
-      - 'src/**'
-      - '.eslint*'
-      - '*.js*' # Includes all .js/.json at the root level
-      - '*.ts' # Includes all .ts at the root level
-      - '.*ignore' # Includes .gitignore and .vercelignore
-      - 'yarn.lock'
-      - '!**/*.md' # Exclude all markdown files
 env:
   STAGE: staging
 
@@ -22,14 +14,14 @@ jobs:
     name: Setup deployment environment (Ubuntu 20.04 - Node 14.x)
     runs-on: ubuntu-20.04
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Locate Yarn Path
+      - name: Locate yarn path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Cache Dependencies
+      - name: Cache dependencies
         uses: actions/cache@v3
         id: yarn-cache
         with:
@@ -38,8 +30,26 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Setup Node Environment
+      - name: Setup node environment
         uses: actions/setup-node@v3
         with:
           node-version: '14.x'
           cache: "yarn"
+
+  run-tests-before-staging:
+    defaults:
+      run:
+        working-directory: packages/api
+    name: Run tests before staging
+    runs-on: ubuntu-20.04
+    needs: [setup-environment]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run unit tests
+        run: |
+          yarn test
