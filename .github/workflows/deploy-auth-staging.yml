@@ -40,7 +40,7 @@ jobs:
     defaults:
       run:
         working-directory: packages/api
-    name: Run tests before staging
+    name: Run unit tests before staging
     runs-on: ubuntu-20.04
     needs: [setup-environment]
     steps:
