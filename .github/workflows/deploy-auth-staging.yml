@@ -13,10 +13,7 @@ jobs:
   setup-environment:
     name: Setup deployment environment (Ubuntu 20.04 - Node 14.x)
     runs-on: ubuntu-20.04
-    steps:
-        - run: node -v
-        - run: npm -v
-        - run: yarn -v
+    steps:        
 #       - name: Checkout code
 #         uses: actions/checkout@v3
 
@@ -33,11 +30,15 @@ jobs:
 #           restore-keys: |
 #             ${{ runner.os }}-yarn-
 
-#       - name: Setup node environment
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: '14.x'
-#           cache: "yarn"
+      - name: Setup node environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14.x'
+          cache: "yarn"
+
+      - run: node -v
+      - run: npm -v
+      - run: yarn -v
 
 #   run-tests-before-staging:
 #     needs: [setup-environment]
