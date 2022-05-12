@@ -2,7 +2,7 @@ name: Deploy to Vercel (staging) - Auth
 
 on:
   push:
-    branches-ignore:
+    branches:
       - "main"
     paths:
       - '.github/workflows/deploy-auth-staging.yml'
@@ -53,3 +53,20 @@ jobs:
       - name: Run unit tests
         run: |
           yarn test
+
+  staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Staging
+        uses:
+          amondnet/vercel-action@v20
+          # with:
+          # vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          # vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          # vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_TL_ENGINE }}
+          # scope: ${{ secrets.VERCEL_ORG_ID }}
